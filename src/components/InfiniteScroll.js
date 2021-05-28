@@ -19,6 +19,26 @@ const InfiniteScroll = () => {
   const [page, setPage] = useState(1)
   const loader = useRef(null)
 
+  useEffect(() => {
+    let options = {
+      root: null,
+      rootMargin: "20px",
+      threshold: 1.0
+    }
+    const observer = new IntersectionObserver(handleObserver, options)
+    if (loader.current) {
+      observer.observe(loader.current)
+    }
+
+  }, [])
+
+  useEffect(() => {
+    const newList = postList.list.concat([1,1,1,1])
+    setPostList({
+        list: newList
+    })
+  }, [page])
+
   const handleObserver = (entities) => {
     const target = entities[0]
     if (target.isIntersecting) {   
