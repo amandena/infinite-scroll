@@ -1,4 +1,4 @@
-import { useState  } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 const divStyle = {
   color: 'blue',
@@ -16,14 +16,22 @@ const containerStyle = {
 
 const InfiniteScroll = () => {
   const [postList, setPostList] = useState({list: [1,2,3,4]})
+  const [page, setPage] = useState(1)
+  const loader = useRef(null)
 
+  const handleObserver = (entities) => {
+    const target = entities[0]
+    if (target.isIntersecting) {   
+      setPage((page) => page + 1)
+    }
+  }
 
   return (
     <div className="container" style={containerStyle}>
       <div className="post-list">
         {postList.list.map((post, index) => {
           return <div key={index} className="post" style={divStyle}>
-            <h2> {post } </h2>
+            <h2> {post} </h2>
           </div>
         })}
         <div className="loading">
