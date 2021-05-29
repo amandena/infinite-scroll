@@ -37,7 +37,7 @@ const InfiniteScroll = () => {
     setPostList({
         list: newList
     })
-  }, [page])
+  }, [page, postList.list])
 
   const handleObserver = (entities) => {
     const target = entities[0]
@@ -54,7 +54,7 @@ const InfiniteScroll = () => {
             <h2> {post} </h2>
           </div>
         })}
-        <div className="loading">
+        <div className="loading" ref={loader}>
           <h2>Load More</h2>
         </div>
       </div>
