@@ -29,13 +29,12 @@ const InfiniteScroll = () => {
     if (loader.current) {
       observer.observe(loader.current)
     }
-
   }, [])
 
   useEffect(() => {
     const newList = postList.list.concat([1,1,1,1])
     setPostList({
-        list: newList
+      list: newList
     })
   }, [page, postList.list])
 
@@ -51,11 +50,11 @@ const InfiniteScroll = () => {
       <div className="post-list">
         {postList.list.map((post, index) => {
           return <div key={index} className="post" style={divStyle}>
-            <h2> {post} </h2>
+            <h2>{post}</h2>
           </div>
         })}
         <div className="loading" ref={loader}>
-          <h2>Load More</h2>
+          <button>Load More</button>
         </div>
       </div>
     </div>
